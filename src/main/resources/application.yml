@@ -1,0 +1,45 @@
+general:
+  kafka-topic: trader-updates
+
+incentive:
+  api:
+    url: http://localhost:8080/incentive
+
+spring:
+  kafka:
+    consumer:
+      group-id: midas-core
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+            value:
+              default:
+                type: com.jpmc.midascore.foundation.Transaction
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+
+  h2:
+    console:
+      enabled: true
+server:
+  port: 33400

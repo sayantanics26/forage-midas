@@ -41,6 +41,7 @@ public class TaskThreeTests {
         while (true) {
             Thread.sleep(20000);
             logger.info("...");
+
         }
     }
 }
